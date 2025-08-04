@@ -8,7 +8,7 @@
 
 ### **🪟 Windows**
 **Bước 1: Cài đặt** 
-👆 **Bấm đúp vào file:** `install.bat` (chạy với quyền Administrator)
+👆 **Chạy file:** `requirements.bat` với quyền Administrator
 
 **Bước 2: Chạy ứng dụng**
 👆 **Bấm đúp vào file:** `run.bat` 
@@ -38,24 +38,7 @@ streamlit run webapp.py
 ### **Bước 3: Sử dụng**
 - Trình duyệt sẽ tự động mở tại: `http://localhost:8501`
 - Nếu không tự mở, copy link này vào trình duyệt
-
 ---
-
-## 📁 **Cấu trúc files quan trọng**
-
-```
-video_tool/
-├── 📄 install.bat          ← Windows: BẤM ĐÚP ĐỂ CÀI ĐẶT
-├── 📄 install.sh           ← macOS/Linux: chmod +x install.sh && ./install.sh
-├── 📄 run.bat              ← Windows: BẤM ĐÚP ĐỂ CHẠY  
-├── 📄 run.sh               ← macOS/Linux: chmod +x run.sh && ./run.sh
-├── 📄 webapp.py            ← File chính (không cần bấm)
-├── 📄 requirements.txt     ← Danh sách thư viện cần thiết
-├── 📁 input/               ← Thư mục chứa ASIN folders
-├── 📁 output/              ← Thư mục video đầu ra
-├── 📁 voice/               ← Thư mục audio files
-└── 📁 credentials/         ← Thư mục API keys
-```
 
 ## ✨ Tính năng chính
 
