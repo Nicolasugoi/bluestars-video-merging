@@ -114,6 +114,7 @@ packages=(
     "soundfile==0.13.1"
     "requests==2.32.3"
     "beautifulsoup4==4.12.3"
+    "opencv-python"
     "lxml"
     "selenium"
     "webdriver-manager"

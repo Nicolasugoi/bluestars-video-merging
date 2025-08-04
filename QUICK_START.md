@@ -28,7 +28,7 @@ python --version
 *(Nếu báo lỗi, tải Python từ: https://python.org)*
 
 #### **Bước 2: Cài đặt tự động**
-1. **Bấm chuột phải** vào `requirements.bat`
+1. **Bấm chuột phải** vào `install.bat`
 2. **Chọn "Run as Administrator"**
 3. **Đợi cài đặt hoàn tất** (5-10 phút)
 
@@ -150,13 +150,12 @@ streamlit run webapp.py
 ## 🎮 **HƯỚNG DẪN SỬ DỤNG NHANH**
 
 ### **Bước 1: Mở ứng dụng**
-- Chạy file run.bat hoặc run.sh tuỳ hệ điều hành máy bạn
 - Trình duyệt mở tại: `http://localhost:8501`
 - Nếu không tự mở, copy link trên vào trình duyệt
 
 ### **Bước 2: Cài đặt cơ bản**
 1. **Nhập Gemini API Key** ở đầu trang
-2. **Nhập folder** chứa các file set up để hệ thống nhận diện
+2. **Upload Excel file** chứa danh sách ASIN
 3. **Chọn thư mục input** chứa ASIN folders
 4. **Upload logo** (PNG/JPG)
 
@@ -180,6 +179,19 @@ ASIN
 B08XXXXXXXXX
 B09XXXXXXXXX
 B10XXXXXXXXX
+```
+
+### **Cấu trúc thư mục:**
+```
+input/
+├── B08XXXXXXXXX/
+│   ├── Media1.jpg     # Hình sản phẩm (bắt buộc)
+│   ├── Media2.mp4     # Video demo (optional)
+│   └── Audio1.mp3     # Nhạc nền (optional)
+└── B09XXXXXXXXX/
+    ├── Media1.png
+    ├── Media2.mp4
+    └── Audio1.wav
 ```
 
 ---

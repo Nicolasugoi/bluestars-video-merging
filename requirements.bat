@@ -94,6 +94,9 @@ if errorlevel 1 echo [WARNING] Failed to install google-auth-oauthlib
 python -m pip install google-auth
 if errorlevel 1 echo [WARNING] Failed to install google-auth
 
+python -m pip install opencv-python
+if errorlevel 1 echo [WARNING] Failed to install opencv-python
+
 echo [INFO] Installing UI components...
 python -m pip install streamlit-sortables
 if errorlevel 1 echo [WARNING] Failed to install streamlit-sortables

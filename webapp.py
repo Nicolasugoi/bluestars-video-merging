@@ -12,7 +12,6 @@ from PIL import Image, ImageDraw, ImageFont
 
 import video
 import clean
-import duration
 import sub
 import script_gemini  
 import tts  
@@ -771,7 +770,7 @@ if st.button("Calculate Duration", key="btn_duration"):
     add_log_to_sidebar("🚀 Starting duration calculation...", "step")
         
     try:
-        logs_duration = duration.main_web(input_excel=excel_filename, output_excel=excel_filename)
+        logs_duration = get_add.calculate_duration(input_excel=excel_filename, output_excel=excel_filename)
         
         if logs_duration:
             for l_dur in logs_duration: 
@@ -1610,7 +1609,7 @@ PIPELINE_STEPS = {
     },
     "duration": {
         "name": "⏱️ Tính thời lượng", 
-        "func": lambda: duration.main_web(input_excel=excel_filename, output_excel=excel_filename)
+        "func": lambda: get_add.calculate_duration(input_excel=excel_filename, output_excel=excel_filename)
     },
     "crawl": {
         "name": "🔍 Info sản phẩm", 

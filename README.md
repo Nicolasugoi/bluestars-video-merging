@@ -20,24 +20,16 @@ chmod +x install.sh
 ./install.sh
 ```
 
-**Bước 2: Chạy ứng dụng**
+**Bước 2: Cấp quyền chạy ứng dụng lần đầu**
 ```bash
-chmod +x run.sh
-./run.sh
+chmod +x run.command
 ```
-
-### **🌐 Tất cả hệ điều hành (Manual)**
-```bash
-# Cài đặt dependencies
-pip install -r requirements.txt
-
-# Chạy ứng dụng
-streamlit run webapp.py
-```
+**Bước 3: Chạy ứng dụng
+👆 **Bấm đúp vào file:** `run.command` 
 
 ### **Bước 3: Sử dụng**
 - Trình duyệt sẽ tự động mở tại: `http://localhost:8501`
-- Nếu không tự mở, copy link này vào trình duyệt
+- Nếu không tự mở, nhập link trên vào trình duyệt
 ---
 
 ## ✨ Tính năng chính
