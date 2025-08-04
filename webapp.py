@@ -317,12 +317,10 @@ def reorder_media_excel_dragdrop(excel_file_path, session_id):
     media_cols = [col for col in df.columns if col.startswith("Media") and col != "Media1"]
     asins = df[asin_col].dropna().astype(str).unique().tolist()
     
-    # ⭐ THÊM: Lọc ra những ASIN thực sự có media để hiển thị
     valid_asins = []
     for asin in asins:
         row = df[df[asin_col] == asin]
-        if not row.empty:
-            # Kiểm tra xem có ít nhất 1 file media tồn tại không
+        if not row.empty:            # Kiểm tra xem có ít nhất 1 file media tồn tại không
             has_valid_media = False
             for col in media_cols:
                 val = str(row.iloc[0].get(col, "")).strip()
@@ -336,7 +334,6 @@ def reorder_media_excel_dragdrop(excel_file_path, session_id):
         st.info("No ASINs with valid media files found. Please check your media folder or run 'Prepare media' again.")
         return
 
-    # ⭐ SỬA ĐỔI: Chỉ hiển thị ASINs có media hợp lệ
     for asin in valid_asins:
         row = df[df[asin_col] == asin]
         if row.empty:
@@ -355,7 +352,6 @@ def reorder_media_excel_dragdrop(excel_file_path, session_id):
             st.write("_(no valid media files)_")
             continue
 
-        # Drag-drop reorder
         display = [os.path.basename(m) for m in media_list]  # Chỉ hiển thị tên file
         try:
             new_disp = sort_items(
@@ -787,13 +783,11 @@ if st.button("Calculate Duration", key="btn_duration"):
             
         add_log_to_sidebar("Duration calculation completed!", "success")
         
-        # Kết thúc log group
         end_log_group()
         
         st.session_state.duration_calculated = True
         st.success("✅ Duration calculation completed! Check sidebar for details.")
         
-        # ⭐ THÊM: Force refresh sidebar
         st.rerun()
         
     except Exception as e:
@@ -801,7 +795,6 @@ if st.button("Calculate Duration", key="btn_duration"):
         end_log_group()  # Kết thúc group ngay cả khi có lỗi
         st.error(f"Error during duration calculation: {e}")
 
-# Generate Prompts - Split into steps
 st.markdown("---")
 st.header("📝 4. Product Information & Prompt Generation")
 
@@ -1816,8 +1809,7 @@ if st.button("🏃‍♂️ Chạy các bước đã chọn", key="btn_run_selec
                     # Chỉ hiển thị các cột có dữ liệu
                     df_display = df_review_filtered[essential_columns].copy()
                     st.info(f"📊 Showing {len(essential_columns)-1} essential columns with data. Click 'Show All Columns' to see everything.")
-                    
-                    # ⭐ SỬA: Column config động
+                
                     column_config = {
                         "ASIN": st.column_config.Column(label="ASIN", disabled=True, width="small")
                     }
@@ -1839,7 +1831,6 @@ if st.button("🏃‍♂️ Chạy các bước đã chọn", key="btn_run_selec
                             else:
                                 column_config[col] = st.column_config.Column(label=col, width="medium")
 
-                    # ⭐ SỬA: data_editor với key stable và không auto-rerun
                     edited = st.data_editor(
                         df_display,
                         column_config=column_config,
@@ -1848,7 +1839,6 @@ if st.button("🏃‍♂️ Chạy các bước đã chọn", key="btn_run_selec
                         disabled=["ASIN"]
                     )
                     
-                    # ⭐ SỬA: Control buttons
                     col1, col2 = st.columns([1, 1])
                     
                     with col1:
