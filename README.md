@@ -7,14 +7,14 @@
 ## 🚀 **Cách chạy ứng dụng (QUAN TRỌNG!)**
 
 ### **🪟 Windows**
-**Bước 1: Cài đặt** 
+**Bước 1: Cài đặt lần đầu** 
 👆 **Chạy file:** `requirements.bat` với quyền Administrator
 
 **Bước 2: Chạy ứng dụng**
 👆 **Bấm đúp vào file:** `run.bat` 
 
 ### **🍎 macOS / 🐧 Linux**
-**Bước 1: Cài đặt**
+**Bước 1: Cài đặt lần đầu**
 ```bash
 chmod +x install.sh
 ./install.sh
@@ -218,7 +218,7 @@ B10XXXXXXXXX
 4. Kiểm tra font system fonts có tồn tại
 5. Liên hệ support team
 
-**📧 Liên hệ:** support@bluestars.com
+**📧 Liên hệ:** nguyen.ducviet.766@gmail.com
 
 ---
 
