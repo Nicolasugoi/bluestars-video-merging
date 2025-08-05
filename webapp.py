@@ -352,7 +352,13 @@ def reorder_media_excel_dragdrop(excel_file_path, session_id):
             st.write("_(no valid media files)_")
             continue
 
-        display = [os.path.basename(m) for m in media_list]  # Chỉ hiển thị tên file
+        sort_key = f"sorted_paths_{asin}_{session_id}"
+        
+        if sort_key not in st.session_state:
+            st.session_state[sort_key] = media_list  # Khởi tạo với thứ tự hiện tại
+        
+        display = [os.path.basename(m) for m in st.session_state[sort_key]]
+        
         try:
             new_disp = sort_items(
                 items=display,
@@ -363,15 +369,19 @@ def reorder_media_excel_dragdrop(excel_file_path, session_id):
             st.error(f"Drag-drop error for {asin}: {e}")
             new_disp = display
 
-        # Map back to full paths
+
         new_paths = []
         for d in new_disp:
             orig = next((m for m in media_list if os.path.basename(m) == d), None)
             if orig:
                 new_paths.append(orig)
+        if new_paths != st.session_state[sort_key]:
+            st.session_state[sort_key] = new_paths
+            st.experimental_rerun()  # Rerun để cập nhật giao diện ngay lập tức
+        
+        display_paths = st.session_state[sort_key]
 
-        # Render each media in a 3-col row
-        for idx, path in enumerate(new_paths):
+        for idx, path in enumerate(display_paths):
             key = f"preview_{asin}_{idx}"
 
             c1, c2, c3 = st.columns([2,9,1])
@@ -391,25 +401,32 @@ def reorder_media_excel_dragdrop(excel_file_path, session_id):
                     
                     show_video()
 
-        # Save if changed
         orig_list = [os.path.basename(m) for m in media_list]
-        new_list = [os.path.basename(m) for m in new_paths]
+        new_list = [os.path.basename(m) for m in display_paths]
         if new_list != orig_list:
             st.markdown("✅ Order changed — remember to save!")
-            if st.button(f"💾 Save for {asin}", key=f"save_{asin}"):
+            if st.button("💾 Save Order", key=f"save_{asin}_{session_id}"):
                 idxs = df[df[asin_col]==asin].index
                 
-                # Clear all media columns first
-                for i in range(2, len(media_cols)+2):
-                    if f"Media{i}" in df.columns:
-                        df.loc[idxs, f"Media{i}"] = ""
+                media_cols_to_clear = [col for col in df.columns if col.startswith("Media") and col != "Media1"]
+                for col in media_cols_to_clear:
+                    df.loc[idxs, col] = ""
+
+                    if df[col].astype(str).str.strip().eq("").all():
+                        df.drop(col, axis=1, inplace=True)
                 
-                # Set new order
                 for i, p in enumerate(new_paths):
                     col_name = f"Media{i+2}"
-                    if col_name in df.columns:
-                        df.loc[idxs, col_name] = p
+                    if col_name not in df.columns:
+                        df.insert(len(df.columns), col_name, "")  # Thêm cột mới vào cuối
+                    df.loc[idxs, col_name] = p
                 
+                last_media_col = f"Media{len(new_paths)+1}"
+                for col in sorted(df.columns):  # Sort để xử lý theo thứ tự
+                    if (col.startswith("Media") and col != "Media1" and 
+                        col > last_media_col and 
+                        df[col].astype(str).str.strip().eq("").all()):
+                        df.drop(col, axis=1, inplace=True)
                 df.to_excel(excel_file_path, index=False)
                 st.success(f"Saved order for {asin}")
                 st.rerun()
