@@ -24,7 +24,7 @@ chmod +x install.sh
 ```bash
 chmod +x run.command
 ```
-**Bước 3: Chạy ứng dụng
+**Bước 3: Chạy ứng dụng**
 👆 **Bấm đúp vào file:** `run.command` 
 
 ### **Bước 3: Sử dụng**
@@ -228,3 +228,4 @@ B10XXXXXXXXX
 **🌟 Được phát triển bởi BlueStars Team**
 
 </div>
+
